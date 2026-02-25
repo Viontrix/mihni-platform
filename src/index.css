@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 20% 98%;
+    --foreground: 160 30% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 160 30% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 30% 10%;
+    --primary: 153 40% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 150 20% 95%;
+    --secondary-foreground: 153 40% 30%;
+    --muted: 150 15% 92%;
+    --muted-foreground: 160 10% 45%;
+    --accent: 153 35% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 150 15% 88%;
+    --input: 150 15% 88%;
+    --ring: 153 40% 30%;
+    --radius: 0.75rem;
+    
+    --green-primary: #2D6A4F;
+    --green-light: #52B788;
+    --green-dark: #1B4332;
+    --green-teal: #40916C;
+    --cream: #F8F9FA;
+    --gray-light: #E9ECEF;
+    --gray-medium: #6C757D;
+    --gray-dark: #343A40;
+    --blue-accent: #4CC9F0;
+    --yellow-accent: #F4D03F;
+    --red-accent: #E63946;
+    --gold: #D4AF37;
+    --gold-light: #F4E4BC;
+  }
+
+  .dark {
+    --background: 165 35% 8%;
+    --foreground: 150 25% 95%;
+    --card: 165 30% 12%;
+    --card-foreground: 150 25% 95%;
+    --popover: 165 30% 12%;
+    --popover-foreground: 150 25% 95%;
+    --primary: 153 40% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 165 25% 18%;
+    --secondary-foreground: 150 25% 95%;
+    --muted: 165 25% 18%;
+    --muted-foreground: 150 15% 60%;
+    --accent: 153 35% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 165 20% 20%;
+    --input: 165 20% 20%;
+    --ring: 153 40% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-tajawal antialiased;
+    direction: rtl;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--green-primary) 0%, var(--green-teal) 50%, var(--green-light) 100%);
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  }
+  
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #F8F9FA 0%, #E9F5F0 30%, #D8F3DC 60%, #B7E4C7 100%);
+  }
+  
+  .bg-gradient-dark-hero {
+    background: linear-gradient(135deg, #0D1B1A 0%, #1B2D2B 30%, #152B26 60%, #1B4332 100%);
+  }
+  
+  .bg-gradient-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  }
+  
+  .card-shadow {
+    box-shadow: 0 4px 20px rgba(45, 106, 79, 0.08);
+  }
+  
+  .card-shadow-hover {
+    box-shadow: 0 12px 40px rgba(45, 106, 79, 0.15), 0 4px 12px rgba(45, 106, 79, 0.1);
+  }
+  
+  .btn-shadow {
+    box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+  }
+  
+  .btn-shadow-hover {
+    box-shadow: 0 8px 25px rgba(45, 106, 79, 0.4);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .pattern-grid {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(45, 106, 79, 0.08) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  
+  .pattern-dots {
+    background-image: radial-gradient(rgba(45, 106, 79, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(45, 106, 79, 0.15);
+  }
+  
+  .border-gradient {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--green-primary), var(--green-teal)) border-box;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(2deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-teal);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(45, 106, 79, 0.2);
+  color: inherit;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--green-primary);
+  outline-offset: 2px;
+}
