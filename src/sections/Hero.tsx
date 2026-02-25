@@ -511,12 +511,28 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
 };
 
 // Floating Elements Component
-const FloatingElements = () => {
+const FloatingElements = ({ currentIndex }: { currentIndex: number }) => {
+  // Images 1 & 2 (index 0 & 1) are scaled to 0.8, so pull floating elements inward ~10%
+  const isScaled = currentIndex === 0 || currentIndex === 1;
+
+  const topClass = isScaled
+    ? 'top-[7%] sm:top-[6%] lg:top-[5%]'
+    : '-top-3 sm:-top-4 lg:-top-5';
+  const bottomClass = isScaled
+    ? 'bottom-[7%] sm:bottom-[6%] lg:bottom-[5%]'
+    : '-bottom-3 sm:-bottom-4 lg:-bottom-5';
+  const leftClass = isScaled
+    ? 'left-[3%] sm:left-[2%] lg:left-[1%]'
+    : '-left-3 sm:-left-4 lg:-left-5';
+  const rightClass = isScaled
+    ? 'right-[3%] sm:right-[2%] lg:right-[1%]'
+    : '-right-3 sm:-right-4 lg:-right-5';
+
   return (
     <>
       {/* Top Right - Lightning */}
       <motion.div
-        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        className={`absolute ${topClass} ${rightClass} w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30 transition-all duration-500`}
         animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       >
@@ -525,7 +541,7 @@ const FloatingElements = () => {
       
       {/* Top Left - Star */}
       <motion.div
-        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        className={`absolute ${topClass} ${leftClass} w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30 transition-all duration-500`}
         animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
       >
@@ -534,7 +550,7 @@ const FloatingElements = () => {
       
       {/* Bottom Left - Download */}
       <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        className={`absolute ${bottomClass} ${leftClass} w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30 transition-all duration-500`}
         animate={{ y: [8, -8, 8] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
@@ -543,7 +559,7 @@ const FloatingElements = () => {
       
       {/* Bottom Right - Award */}
       <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        className={`absolute ${bottomClass} ${rightClass} w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30 transition-all duration-500`}
         animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
         transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
       >
@@ -592,7 +608,7 @@ const ImageShowcase = () => {
         </AnimatePresence>
         
         {/* Floating Elements - positioned relative to the preview card */}
-        <FloatingElements />
+        <FloatingElements currentIndex={currentIndex} />
       </div>
 
       {/* Navigation Dots */}
