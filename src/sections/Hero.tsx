@@ -569,9 +569,9 @@ const ImageShowcase = () => {
   const renderPreview = () => {
     switch (currentData.id) {
       case 1:
-        return <DashboardPreview data={currentData} />;
+        return <div className="scale-[0.8] origin-center"><DashboardPreview data={currentData} /></div>;
       case 2:
-        return <CertificatePreview data={currentData} />;
+        return <div className="scale-[0.8] origin-center"><CertificatePreview data={currentData} /></div>;
       case 3:
         return <CalculatorPreview data={currentData} />;
       case 4:
