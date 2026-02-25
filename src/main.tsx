@@ -93,13 +93,12 @@ createRoot(document.getElementById('root')!).render(
           element={<Navigate to={ROUTES.START} replace />} 
         />
         
-        {/* Legacy Tool Routes - Redirects only */}
-        <Route path="/tools/certificate-maker" element={<Navigate to="/tools/certificate" replace />} />
-        <Route path="/tools/quiz-generator" element={<Navigate to="/tools/quiz-generator" replace />} />
-        <Route path="/tools/schedule-builder" element={<Navigate to="/tools/schedule-builder" replace />} />
-        <Route path="/tools/report-generator" element={<Navigate to="/tools/report-generator" replace />} />
-        <Route path="/tools/performance-analyzer" element={<Navigate to="/tools/performance-analyzer" replace />} />
-        <Route path="/tools/survey-builder" element={<Navigate to="/tools/survey-builder" replace />} />
+        {/* Legacy Tool Routes - Redirect broken slugs to /start */}
+        <Route path="/tools/certificate-maker" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/schedule-builder" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/report-generator" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/performance-analyzer" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/survey-builder" element={<Navigate to={ROUTES.START} replace />} />
         
         {/* User Account Routes */}
         <Route path={ROUTES.ACCOUNT} element={<AccountPage />} />

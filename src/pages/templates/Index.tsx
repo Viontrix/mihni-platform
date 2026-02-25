@@ -15,11 +15,13 @@ import {
   BookOpen,
   Heart,
   ChevronRight,
+  Link2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { api } from '@/lib/api';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES, getTemplateUrl } from '@/lib/routes';
+import { toast } from 'sonner';
 import Navbar from '@/sections/Navbar';
 
 // Icon mapping
@@ -214,7 +216,7 @@ export default function TemplatesPage() {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   whileHover={{ y: -5 }}
                   className="group relative bg-white dark:bg-[#1B2D2B] rounded-2xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden hover:border-amber-400/50 hover:shadow-xl transition-all cursor-pointer"
-                  onClick={() => navigate(`/templates/${template.slug}`)}
+                  onClick={() => navigate(getTemplateUrl(template.slug))}
                 >
                   {/* Preview Area */}
                   <div className="h-40 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 flex items-center justify-center relative overflow-hidden">
@@ -256,15 +258,30 @@ export default function TemplatesPage() {
                         استخدم القالب
                         <ChevronRight className="w-4 h-4" />
                       </span>
-                      <button 
-                        className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // Toggle favorite
-                        }}
-                      >
-                        <Heart className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center gap-1.5">
+                        <button 
+                          className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-green-100 hover:text-green-600 transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const url = `${window.location.origin}${window.location.pathname}#${getTemplateUrl(template.slug)}`;
+                            navigator.clipboard.writeText(url).then(() => {
+                              toast.success('تم نسخ الرابط');
+                            });
+                          }}
+                          title="نسخ الرابط"
+                        >
+                          <Link2 className="w-4 h-4" />
+                        </button>
+                        <button 
+                          className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Toggle favorite
+                          }}
+                        >
+                          <Heart className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
