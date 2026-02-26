@@ -177,13 +177,12 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/pricing': getHomeSectionUrl('pricing'),
   '/tools': ROUTES.START,
   '/templates': ROUTES.TEMPLATES,
-  // Legacy tool routes - redirect to dynamic routes
-  '/tools/certificate-maker': getToolUrl('certificate'),
-  '/tools/quiz-generator': getToolUrl('quiz-generator'),
-  '/tools/schedule-builder': getToolUrl('schedule-builder'),
-  '/tools/report-generator': getToolUrl('report-generator'),
-  '/tools/performance-analyzer': getToolUrl('performance-analyzer'),
-  '/tools/survey-builder': getToolUrl('survey-builder'),
+  // Legacy tool routes - redirect broken slugs to start page
+  '/tools/certificate-maker': ROUTES.START,
+  '/tools/schedule-builder': ROUTES.START,
+  '/tools/report-generator': ROUTES.START,
+  '/tools/performance-analyzer': ROUTES.START,
+  '/tools/survey-builder': ROUTES.START,
 };
 
 /**

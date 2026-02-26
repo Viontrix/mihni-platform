@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft,
   Loader2,
@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/api';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES, getTemplateUrl } from '@/lib/routes';
 import { templateRegistry } from '@/lib/templates/registry';
 import Navbar from '@/sections/Navbar';
 import { toast } from 'sonner';
@@ -36,6 +36,7 @@ interface TemplateResult {
 
 export default function TemplatePage() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   
   const [template, setTemplateState] = useState<ReturnType<typeof templateRegistry.getTemplate> | null>(null);
   const [loading, setLoading] = useState(true);
@@ -172,17 +173,41 @@ export default function TemplatePage() {
 
   // Not Found State
   if (notFound || !template) {
+    const availableTemplates = templateRegistry.getAllTemplates().slice(0, 5);
+    
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:to-[#1B2D2B]">
         <Navbar />
         <div className="h-[80px]" />
         <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="text-center">
+          <div className="text-center max-w-md mx-auto px-4">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-700 mb-2">القالب غير موجود</h1>
-            <p className="text-gray-500 mb-6">القالب المطلوب غير متوفر</p>
+            <h1 className="text-2xl font-bold text-gray-700 dark:text-white mb-2">القالب غير موجود</h1>
+            <p className="text-gray-500 dark:text-gray-400 mb-6">القالب المطلوب غير متوفر</p>
+
+            {availableTemplates.length > 0 && (
+              <div className="mb-6">
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">جرّب أحد القوالب المتاحة:</p>
+                <div className="flex flex-col gap-2">
+                  {availableTemplates.map((t) => (
+                    <button
+                      key={t.slug}
+                      onClick={() => navigate(getTemplateUrl(t.slug))}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-[#1B2D2B] border border-gray-200 dark:border-gray-700 hover:border-amber-400/50 hover:shadow-md transition-all text-right"
+                    >
+                      <LayoutTemplate className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-green-dark dark:text-white truncate">{t.name}</p>
+                        <p className="text-xs text-gray-400 truncate">{t.description}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <Link to={ROUTES.TEMPLATES}>
-              <Button>العودة للقوالب</Button>
+              <Button>العودة لجميع القوالب</Button>
             </Link>
           </div>
         </div>
