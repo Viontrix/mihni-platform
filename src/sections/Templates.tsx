@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ROUTES, getTemplateUrl } from '@/lib/routes';
+import { toast } from 'sonner';
 import { 
   Award, 
   FileText, 
@@ -21,7 +22,8 @@ import {
   Eye,
   Heart,
   Lock,
-  Check
+  Check,
+  Link2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -138,6 +140,21 @@ const TemplateCard = ({ template, index }: { template: typeof templates[0]; inde
             <ChevronRight className="w-4 h-4 mr-auto" />
           </Button>
         </Link>
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full text-xs mt-2 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-green-primary/50 hover:text-green-primary transition-all"
+          onClick={(e) => {
+            e.stopPropagation();
+            const url = `${window.location.origin}/#/editor/${template.id}`;
+            navigator.clipboard.writeText(url).then(() => {
+              toast.success('تم نسخ الرابط بنجاح');
+            });
+          }}
+        >
+          <Link2 className="w-3.5 h-3.5 ml-1.5" />
+          نسخ الرابط
+        </Button>
       </div>
     </motion.div>
   );
