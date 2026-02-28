@@ -1,63 +1,147 @@
 /**
  * Routes Configuration - Single Source of Truth
  * تهيئة المسارات - مصدر الحقيقة الوحيد
+ * 
+ * This file contains ALL route definitions for the application.
+ * ANY hardcoded route strings elsewhere are considered legacy and should be migrated.
  */
 
-export const ROUTES = {
-  // Landing
-  HOME: '/',
+// ============================================
+// Route Constants
+// ============================================
 
+export const ROUTES = {
+  // Home & Landing
+  HOME: '/',
+  
   // Auth
   LOGIN: '/login',
-  SIGNUP: '/signup',
-
-  // Libraries
-  TOOLS: '/tools',
-  TOOL_DETAIL: '/tools', // + /:slug
+  REGISTER: '/register',
+  
+  // Tools
+  START: '/start',                    // Tool picker page
+  TOOLS: '/tools',                    // Redirects to START
+  TOOL_DETAIL: '/tools/:slug',        // Individual tool page
+  
+  // Templates
   TEMPLATES: '/templates',
-  TEMPLATE_DETAIL: '/templates', // + /:slug
+  TEMPLATE_DETAIL: '/templates/:slug',
+  
+  // Pricing & Payment
+  PRICING: '/pricing',                // Redirects to HOME with section param
+  PAYMENT: '/payment',
+  
+  // User Account
+  ACCOUNT: '/account',
+  DASHBOARD: '/dashboard',
+  
+  // Admin
+  ADMIN: '/admin',
+  
+  // Support
+  SUPPORT: '/support',
+} as const;
 
-  // Editor
-  EDITOR: '/editor', // + /:toolId
+// ============================================
+// Home Section Query Param Helpers
+// ============================================
 
-  // System
-  COMING_SOON: '/coming-soon',
-  NOT_FOUND: '/*',
-} as const
+export type HomeSection = 'hero' | 'tools' | 'templates' | 'pricing' | 'faq' | 'how-it-works';
 
-// Helpers
-export function getToolUrl(slug: string) {
-  return `${ROUTES.TOOL_DETAIL}/${slug}`
+/**
+ * Generate a URL for navigating to a specific section on the homepage
+ * يولد رابط للتنقل إلى قسم محدد في الصفحة الرئيسية
+ */
+export function getHomeSectionUrl(section: HomeSection): string {
+  return `/?section=${section}`;
 }
 
-export function getToolsUrl() {
-  return ROUTES.TOOLS
+/**
+ * Parse section from query params
+ * يستخرج القسم من معلمات الاستعلام
+ */
+export function getSectionFromSearch(search: string): HomeSection | null {
+  const params = new URLSearchParams(search);
+  const section = params.get('section');
+  if (section && ['hero', 'tools', 'templates', 'pricing', 'faq', 'how-it-works'].includes(section)) {
+    return section as HomeSection;
+  }
+  return null;
 }
 
-export function getTemplateUrl(slug: string) {
-  return `${ROUTES.TEMPLATE_DETAIL}/${slug}`
+// ============================================
+// Payment URL Builders
+// ============================================
+
+export type PlanId = 'free' | 'pro' | 'business' | 'enterprise';
+export type BillingCycle = 'monthly' | 'yearly';
+export type PaymentSource = 'pricing' | 'dashboard' | 'account' | 'tools';
+
+interface PaymentUrlParams {
+  plan?: PlanId;
+  billing?: BillingCycle;
+  from?: PaymentSource;
+  addon?: 'storage';
 }
 
-export function getTemplatesUrl() {
-  return ROUTES.TEMPLATES
+/**
+ * Build payment page URL with query params
+ * يبني رابط صفحة الدفع مع معلمات الاستعلام
+ */
+export function getPaymentUrl(params: PaymentUrlParams = {}): string {
+  const searchParams = new URLSearchParams();
+  
+  if (params.plan) searchParams.set('plan', params.plan);
+  if (params.billing) searchParams.set('billing', params.billing);
+  if (params.from) searchParams.set('from', params.from);
+  if (params.addon) searchParams.set('addon', params.addon);
+  
+  const queryString = searchParams.toString();
+  return queryString ? `${ROUTES.PAYMENT}?${queryString}` : ROUTES.PAYMENT;
 }
 
-export function getEditorUrl(toolId: string) {
-  return `${ROUTES.EDITOR}/${toolId}`
+// ============================================
+// Back Navigation Helpers
+// ============================================
+
+/**
+ * Determine back destination based on 'from' parameter
+ * يحدد وجهة الرجوع بناءً على معلمة 'from'
+ */
+export function getBackDestination(fromParam: string | null): { path: string; label: string } {
+  switch (fromParam) {
+    case 'pricing':
+      return { path: getHomeSectionUrl('pricing'), label: 'رجوع' };
+    case 'dashboard':
+      return { path: ROUTES.DASHBOARD, label: 'العودة للوحة التحكم' };
+    case 'account':
+      return { path: ROUTES.ACCOUNT, label: 'العودة للحساب' };
+    case 'tools':
+      return { path: ROUTES.START, label: 'العودة للأدوات' };
+    default:
+      return { path: ROUTES.HOME, label: 'العودة للرئيسية' };
+  }
 }
 
+// ============================================
+// Tool URL Helpers
+// ============================================
 
-export function getHomeSectionUrl(sectionId: string) {
-  return `/?section=${encodeURIComponent(sectionId)}`
+/**
+ * Get tool detail page URL
+ * يحصل على رابط صفحة الأداة
+ */
+export function getToolUrl(slug: string): string {
+  return `/tools/${slug}`;
 }
 
-
-export function getComingSoonUrl(kind: 'tool' | 'template', slug?: string) {
-  const s = slug ? `/${encodeURIComponent(slug)}` : '';
-  return `/coming-soon/${kind}${s}`;
+/**
+ * Get template detail page URL
+ * يحصل على رابط صفحة القالب
+ */
+export function getTemplateUrl(slug: string): string {
+  return `/templates/${slug}`;
 }
-<<<<<<< Updated upstream
-=======
 
 // ============================================
 // Account URL Helpers
@@ -147,4 +231,3 @@ export const FOOTER_LINKS = {
     { name: 'الدعم الفني', href: ROUTES.SUPPORT },
   ],
 };
->>>>>>> Stashed changes

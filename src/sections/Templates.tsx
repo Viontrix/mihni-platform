@@ -146,12 +146,7 @@ const TemplateCard = ({ template, index }: { template: typeof templates[0]; inde
           className="w-full text-xs mt-2 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-green-primary/50 hover:text-green-primary transition-all"
           onClick={(e) => {
             e.stopPropagation();
-<<<<<<< Updated upstream
-            const url = `${window.location.origin}/#${template.id}`;
-=======
-            // Copy a TEMPLATE link (not the tool editor) to avoid 404s.
-            const url = `${window.location.origin}/#${getTemplateUrl(template.id)}`;
->>>>>>> Stashed changes
+            const url = `${window.location.origin}/#/editor/${template.id}`;
             navigator.clipboard.writeText(url).then(() => {
               toast.success('تم نسخ الرابط بنجاح');
             });

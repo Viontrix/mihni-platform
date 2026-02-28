@@ -27,7 +27,6 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { unifiedPlans, storageAddons, getYearlySavings } from '@/lib/entitlements/plans';
 import type { UnifiedPlan } from '@/lib/entitlements/plans';
 import Navbar from '@/sections/Navbar';
-import { PageBackBar } from '@/components/navigation/PageBackBar';
 import { ROUTES, getHomeSectionUrl, getBackDestination } from '@/lib/routes';
 
 // Payment method logo component
@@ -187,7 +186,16 @@ export default function PaymentPage() {
       {/* Spacer for fixed navbar */}
       <div className="h-[80px]" />
 
-      <PageBackBar className="pt-4" />
+      {/* Back Button */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <Link 
+          to={backDestination.path} 
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-green-primary transition-colors"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span>{backDestination.label}</span>
+        </Link>
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         {/* Page Title */}

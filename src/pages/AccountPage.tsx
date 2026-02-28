@@ -23,7 +23,6 @@ import {
   TrendingUp,
   Zap
 } from 'lucide-react';
-import { PageBackBar } from '@/components/navigation/PageBackBar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -144,8 +143,6 @@ export default function AccountPage() {
 
   return (
     <div className="min-h-screen bg-gray-50/50">
-      <PageBackBar className="pt-6" />
-
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -170,7 +167,7 @@ export default function AccountPage() {
                 </div>
               </div>
             </div>
-            <Button variant="outline" onClick={() => navigate(ROUTES.HOME)}>
+            <Button variant="outline" onClick={() => navigate(ROUTES.START)}>
               العودة للأدوات
             </Button>
           </div>
@@ -421,7 +418,7 @@ export default function AccountPage() {
               <Card className="p-12 text-center">
                 <FolderOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 mb-4">لا توجد مشاريع محفوظة</p>
-                <Button onClick={() => navigate(ROUTES.HOME)}>استكشف الأدوات</Button>
+                <Button onClick={() => navigate(ROUTES.START)}>استكشف الأدوات</Button>
               </Card>
             ) : (
               <div className="grid gap-4">

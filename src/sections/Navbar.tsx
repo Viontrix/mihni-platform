@@ -158,7 +158,7 @@ export default function Navbar() {
             )}
 
             {/* Get Started Button - Goes to start page for Guest Mode */}
-            <Link to={ROUTES.HOME}>
+            <Link to={ROUTES.START}>
               <Button className="hidden sm:flex bg-gradient-to-r from-green-primary to-green-teal text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 rounded-xl font-semibold">
                 ابدأ مجاناً
               </Button>
@@ -228,7 +228,7 @@ export default function Navbar() {
                     </Button>
                   </Link>
                 )}
-                <Link to={ROUTES.HOME} className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link to={ROUTES.START} className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button className="w-full bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl">
                     ابدأ مجاناً
                   </Button>

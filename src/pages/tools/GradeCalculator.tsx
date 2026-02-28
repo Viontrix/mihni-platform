@@ -345,7 +345,7 @@ export default function GradeCalculatorPage() {
       <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#1B2D2B]/95 backdrop-blur border-b border-border">
         <div className="max-w-screen-2xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link to={ROUTES.HOME}>
+            <Link to={ROUTES.START}>
               <Button variant="ghost" size="sm">
                 <ArrowRight className="w-4 h-4 ml-2" />
                 الأدوات

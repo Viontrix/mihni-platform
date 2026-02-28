@@ -105,7 +105,7 @@ export function useGuestExport(): UseGuestExportReturn {
    */
   const handleRegister = useCallback(() => {
     closeModal();
-    navigate(ROUTES.SIGNUP);
+    navigate(ROUTES.REGISTER);
   }, [navigate, closeModal]);
 
   /**

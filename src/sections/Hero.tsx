@@ -739,7 +739,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link to={ROUTES.HOME}>
+                <Link to={ROUTES.START}>
                   <Button
                     size="lg"
                     className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"

@@ -21,7 +21,6 @@ import { isAdmin } from '@/lib/api/storage';
 import { ROUTES } from '@/lib/routes';
 import { formatBytes } from '@/lib/entitlements';
 import Navbar from '@/sections/Navbar';
-import { PageBackBar } from '@/components/navigation/PageBackBar';
 
 // ============================================
 // Types
@@ -302,8 +301,6 @@ export default function AdminPage() {
     <div dir="rtl" className="min-h-screen bg-gray-50 dark:bg-[#0D1B1A]">
       <Navbar />
       <div className="h-[80px]" />
-
-      <PageBackBar className="pt-4" />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}

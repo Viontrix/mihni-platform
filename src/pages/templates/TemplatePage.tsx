@@ -15,19 +15,10 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/api';
-<<<<<<< Updated upstream
-import { ROUTES, getTemplateUrl, getTemplatesUrl } from '@/lib/routes';
-import { templateRegistry } from '@/lib/templates/registry';
-import Navbar from '@/sections/Navbar';
-import { toast } from 'sonner';
-import BreadcrumbBar from '@/components/navigation/BreadcrumbBar';
-=======
 import { ROUTES, getTemplateUrl } from '@/lib/routes';
 import { templateRegistry } from '@/lib/templates/registry';
 import Navbar from '@/sections/Navbar';
 import { toast } from 'sonner';
-import { PageBackBar } from '@/components/navigation/PageBackBar';
->>>>>>> Stashed changes
 
 // ============================================
 // Types
@@ -61,7 +52,6 @@ export default function TemplatePage() {
     if (!slug) {
       setNotFound(true);
       setLoading(false);
-      navigate(getComingSoonUrl('template', slug));
       return;
     }
 
@@ -70,7 +60,6 @@ export default function TemplatePage() {
     if (!tmpl) {
       setNotFound(true);
       setLoading(false);
-      navigate(getComingSoonUrl('template', slug));
       return;
     }
 
@@ -175,14 +164,6 @@ export default function TemplatePage() {
       <div className="min-h-screen bg-gradient-to-b from-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:to-[#1B2D2B]">
         <Navbar />
         <div className="h-[80px]" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <BreadcrumbBar
-          items={[{ label: 'الرئيسية', to: '/' }, { label: 'القوالب', to: getTemplatesUrl() }, { label: template?.title ?? 'قالب' }]}
-          backFallback={getTemplatesUrl()}
-        />
-      </div>
-
         <div className="flex items-center justify-center min-h-[60vh]">
           <Loader2 className="w-10 h-10 animate-spin text-green-primary" />
         </div>
@@ -198,14 +179,6 @@ export default function TemplatePage() {
       <div className="min-h-screen bg-gradient-to-b from-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:to-[#1B2D2B]">
         <Navbar />
         <div className="h-[80px]" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <BreadcrumbBar
-          items={[{ label: 'الرئيسية', to: '/' }, { label: 'القوالب', to: getTemplatesUrl() }, { label: template?.title ?? 'قالب' }]}
-          backFallback={getTemplatesUrl()}
-        />
-      </div>
-
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center max-w-md mx-auto px-4">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
@@ -246,18 +219,6 @@ export default function TemplatePage() {
     <div className="min-h-screen bg-gradient-to-b from-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:to-[#1B2D2B]">
       <Navbar />
       <div className="h-[80px]" />
-
-<<<<<<< Updated upstream
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <BreadcrumbBar
-          items={[{ label: 'الرئيسية', to: '/' }, { label: 'القوالب', to: getTemplatesUrl() }, { label: template?.title ?? 'قالب' }]}
-          backFallback={getTemplatesUrl()}
-        />
-      </div>
-
-=======
-      <PageBackBar className="pt-4" />
->>>>>>> Stashed changes
 
       {/* Header */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

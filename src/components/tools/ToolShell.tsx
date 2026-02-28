@@ -3,7 +3,7 @@
  * هيكل الأداة - التخطيط الرئيسي لصفحات الأدوات
  */
 
-import { ArrowRight, Save, History, Sparkles, Home } from 'lucide-react';
+import { ArrowRight, Save, History, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,7 +15,6 @@ import { canUseTool } from '@/lib/entitlements/check';
 import { getTodayRunCount } from '@/lib/usage/store';
 import { trackToolOpened } from '@/lib/analytics/track';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
 interface ToolShellProps {
   tool: ToolDefinition;
@@ -26,8 +25,6 @@ interface ToolShellProps {
   onShowHistory?: () => void;
   showHistory?: boolean;
   className?: string;
-  breadcrumbs?: BreadcrumbItem[];
-  backFallback?: string;
 }
 
 export function ToolShell({
@@ -39,10 +36,7 @@ export function ToolShell({
   onShowHistory,
   showHistory = true,
   className,
-  breadcrumbs,
-  backFallback = '/',
 }: ToolShellProps) {
-  const navigate = useNavigate();
   const [todayRuns, setTodayRuns] = useState(0);
   
   useEffect(() => {
@@ -69,14 +63,6 @@ export function ToolShell({
 
   return (
     <div className={cn('min-h-screen bg-gray-50/50', className)}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <BreadcrumbBar items={breadcrumbs ?? [{ label: 'الرئيسية', to: '/' }]} backFallback={backFallback} />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <BreadcrumbBar items={breadcrumbs ?? [{ label: 'الرئيسية', to: '/' }]} backFallback={backFallback} />
-      </div>
-
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -99,27 +85,6 @@ export function ToolShell({
 
             {/* Actions */}
             <div className="flex items-center gap-3">
-              {/* Back / Home */}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigate(-1)}
-                className="hidden sm:flex"
-              >
-                <ArrowRight className="w-4 h-4 mr-2" />
-                رجوع
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="hidden sm:flex"
-              >
-                <Link to="/">
-                  <Home className="w-4 h-4 mr-2" />
-                  الرئيسية
-                </Link>
-              </Button>
               {showHistory && onShowHistory && (
                 <Button
                   variant="outline"

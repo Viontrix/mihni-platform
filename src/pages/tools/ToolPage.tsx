@@ -10,7 +10,7 @@ import { ToolShell, ToolRunnerClient } from '@/components/tools';
 import { getCurrentPlan } from '@/lib/billing/subscription';
 import { toast } from 'sonner';
 import type { UserPlan } from '@/lib/tools/types';
-import { ROUTES, getHomeSectionUrl, getToolsUrl } from '@/lib/routes';
+import { ROUTES, getHomeSectionUrl } from '@/lib/routes';
 import {
   FormControl,
   FormField,
@@ -613,14 +613,14 @@ export default function ToolPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-2">الأداة غير موجودة</h1>
           <p className="text-gray-600 mb-4">الأداة التي تبحث عنها غير متوفرة</p>
-          <Button onClick={() => navigate(getToolsUrl())}>العودة للأدوات</Button>
+          <Button onClick={() => navigate(ROUTES.START)}>العودة للأدوات</Button>
         </div>
       </div>
     );
   }
 
   const handleUpgrade = () => {
-    navigate(getComingSoonUrl('tool', slug));
+    navigate(getHomeSectionUrl('pricing'));
   };
 
   const handleSave = () => {
@@ -635,8 +635,6 @@ export default function ToolPage() {
     <ToolShell
       tool={tool}
       userPlan={userPlan}
-      breadcrumbs={[{ label: 'الرئيسية', to: '/' }, { label: 'الأدوات الذكية', to: getToolsUrl() }, { label: tool.title }]}
-      backFallback={getToolsUrl()}
       onUpgrade={handleUpgrade}
       onSave={handleSave}
       onShowHistory={handleShowHistory}
