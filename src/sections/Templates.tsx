@@ -3,12 +3,12 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ROUTES, getTemplateUrl } from '@/lib/routes';
 import { toast } from 'sonner';
-import { 
-  Award, 
-  FileText, 
-  ClipboardList, 
-  Calendar, 
-  BarChart3, 
+import {
+  Award,
+  FileText,
+  ClipboardList,
+  Calendar,
+  BarChart3,
   BookOpen,
   GraduationCap,
   Medal,
@@ -35,11 +35,11 @@ const TemplateBadge = ({ type }: { type: string }) => {
     popular: { bg: 'bg-amber-500', icon: TrendingUp, text: 'شائع' },
     pro: { bg: 'bg-purple-500', icon: Lock, text: 'محترف' },
   };
-  
+
   const badge = badges[type];
   if (!badge) return null;
   const Icon = badge.icon;
-  
+
   return (
     <span className={`px-2 py-0.5 ${badge.bg} text-white text-[10px] font-bold rounded-full flex items-center gap-1`}>
       <Icon className="w-3 h-3" />
@@ -51,7 +51,7 @@ const TemplateBadge = ({ type }: { type: string }) => {
 // Template Card Component
 const TemplateCard = ({ template, index }: { template: typeof templates[0]; index: number }) => {
   const [isLiked, setIsLiked] = useState(false);
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -73,16 +73,16 @@ const TemplateCard = ({ template, index }: { template: typeof templates[0]; inde
             <template.icon className={`w-8 h-8 ${template.iconColor}`} />
           </motion.div>
         </div>
-        
+
         {/* Badges */}
         <div className="absolute top-3 right-3 flex gap-1">
           {template.badges.map((badge) => (
             <TemplateBadge key={badge} type={badge} />
           ))}
         </div>
-        
+
         {/* Hover Overlay */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-green-dark/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
         >
           <motion.div
@@ -93,30 +93,29 @@ const TemplateCard = ({ template, index }: { template: typeof templates[0]; inde
             <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-green-primary hover:text-white transition-colors">
               <Eye className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={() => setIsLiked(!isLiked)}
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                isLiked ? 'bg-red-500 text-white' : 'bg-white hover:bg-red-100 hover:text-red-500'
-              }`}
+              className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${isLiked ? 'bg-red-500 text-white' : 'bg-white hover:bg-red-100 hover:text-red-500'
+                }`}
             >
               <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
             </button>
           </motion.div>
         </motion.div>
       </div>
-      
+
       {/* Content */}
       <div className="p-4">
         {/* Category */}
         <span className="text-[11px] text-gray-500 font-medium uppercase tracking-wide">
           {template.category}
         </span>
-        
+
         {/* Title */}
         <h4 className="font-bold text-green-dark dark:text-white mt-1 mb-2 group-hover:text-green-primary transition-colors line-clamp-1">
           {template.name}
         </h4>
-        
+
         {/* Stats */}
         <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
           <span className="flex items-center gap-1">
@@ -128,11 +127,11 @@ const TemplateCard = ({ template, index }: { template: typeof templates[0]; inde
             {template.rating}
           </span>
         </div>
-        
+
         {/* Action */}
         <Link to={getTemplateUrl(template.id)}>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
             className="w-full text-xs border-green-primary/30 text-green-primary hover:bg-green-primary hover:text-white transition-all"
           >
@@ -146,7 +145,7 @@ const TemplateCard = ({ template, index }: { template: typeof templates[0]; inde
           className="w-full text-xs mt-2 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-green-primary/50 hover:text-green-primary transition-all"
           onClick={(e) => {
             e.stopPropagation();
-            const url = `${window.location.origin}/#/editor/${template.id}`;
+            const url = `${window.location.origin}/#${getTemplateUrl(template.id)}`;
             navigator.clipboard.writeText(url).then(() => {
               toast.success('تم نسخ الرابط بنجاح');
             });
@@ -294,21 +293,21 @@ export default function Templates() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <motion.div 
+          <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-primary/10 text-green-primary dark:text-green-light text-sm font-semibold mb-6"
             whileHover={{ scale: 1.02 }}
           >
             <BookOpen className="w-4 h-4" />
             مكتبة القوالب الجاهزة
           </motion.div>
-          
+
           <h2 className="text-4xl sm:text-5xl font-bold text-green-dark dark:text-white mb-4">
             Template Library
             <span className="block text-2xl sm:text-3xl mt-2 text-gray-600 dark:text-gray-300">
               قوالب فردية مستقلة جاهزة للاستخدام
             </span>
           </h2>
-          
+
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             مكتبة ضخمة من القوالب الاحترافية المصممة مسبقاً، تعديل بسيط فقط بدون تخصيص متقدم
           </p>
@@ -348,11 +347,10 @@ export default function Templates() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === cat.id
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat.id
                   ? 'bg-green-primary text-white shadow-md'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
-              }`}
+                }`}
             >
               {cat.name}
               <span className={`mr-1.5 text-xs ${activeCategory === cat.id ? 'text-white/70' : 'text-gray-400'}`}>
@@ -371,7 +369,7 @@ export default function Templates() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {templates
-            .filter((template) => activeCategory === 'all' || 
+            .filter((template) => activeCategory === 'all' ||
               (activeCategory === 'certificates' && template.category === 'شهادات') ||
               (activeCategory === 'reports' && template.category === 'تقارير') ||
               (activeCategory === 'schedules' && template.category === 'جداول') ||
@@ -392,8 +390,8 @@ export default function Templates() {
           className="mt-12 text-center"
         >
           <Link to={ROUTES.TEMPLATES}>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="lg"
               className="px-8 py-3 border-2 border-green-primary text-green-primary hover:bg-green-primary hover:text-white transition-all rounded-xl"
             >
