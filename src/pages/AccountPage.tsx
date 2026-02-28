@@ -167,7 +167,7 @@ export default function AccountPage() {
                 </div>
               </div>
             </div>
-            <Button variant="outline" onClick={() => navigate(ROUTES.START)}>
+            <Button variant="outline" onClick={() => navigate(ROUTES.HOME)}>
               العودة للأدوات
             </Button>
           </div>
@@ -418,7 +418,7 @@ export default function AccountPage() {
               <Card className="p-12 text-center">
                 <FolderOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 mb-4">لا توجد مشاريع محفوظة</p>
-                <Button onClick={() => navigate(ROUTES.START)}>استكشف الأدوات</Button>
+                <Button onClick={() => navigate(ROUTES.HOME)}>استكشف الأدوات</Button>
               </Card>
             ) : (
               <div className="grid gap-4">

@@ -412,7 +412,7 @@ export default function Pricing() {
                   <div className="p-5 pt-0">
                     <Link to={
                       plan.id === 'free' 
-                        ? ROUTES.START
+                        ? ROUTES.HOME
                         : getPaymentUrl({ plan: plan.id as PlanId, billing: isYearly ? 'yearly' : 'monthly', from: 'pricing' })
                     }>
                       <Button

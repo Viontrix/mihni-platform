@@ -95,7 +95,7 @@ export default function NotFoundPage() {
               </Button>
             </Link>
             
-            <Link to={ROUTES.START}>
+            <Link to={ROUTES.HOME}>
               <Button 
                 variant="outline"
                 size="lg"
@@ -125,7 +125,7 @@ export default function NotFoundPage() {
                 مركز المساعدة
               </Link>
               <Link 
-                to={ROUTES.START}
+                to={ROUTES.HOME}
                 className="px-4 py-2 text-sm text-green-primary hover:bg-green-primary/10 rounded-xl transition-colors"
               >
                 الأدوات الذكية

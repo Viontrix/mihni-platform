@@ -68,7 +68,7 @@ const quickTools = [
 const sidebarItems = [
   { id: 'dashboard', name: 'لوحة التحكم', icon: LayoutDashboard, active: true, link: ROUTES.DASHBOARD },
   { id: 'templates', name: 'قوالبي', icon: FolderOpen, active: false, link: ROUTES.TEMPLATES },
-  { id: 'tools', name: 'الأدوات الذكية', icon: Zap, active: false, link: ROUTES.START },
+  { id: 'tools', name: 'الأدوات الذكية', icon: Zap, active: false, link: ROUTES.HOME },
   { id: 'settings', name: 'الإعدادات', icon: Settings, active: false, link: ROUTES.ACCOUNT },
 ];
 

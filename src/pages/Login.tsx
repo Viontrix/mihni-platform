@@ -163,7 +163,7 @@ export default function Login() {
           {/* Register Link */}
           <p className="text-center mt-6 text-gray-medium">
             ليس لديك حساب؟{' '}
-            <Link to={ROUTES.REGISTER} className="text-green-primary hover:underline font-medium">
+            <Link to={ROUTES.SIGNUP} className="text-green-primary hover:underline font-medium">
               سجل الآن
             </Link>
           </p>

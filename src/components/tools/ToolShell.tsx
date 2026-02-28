@@ -25,6 +25,8 @@ interface ToolShellProps {
   onShowHistory?: () => void;
   showHistory?: boolean;
   className?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  backFallback?: string;
 }
 
 export function ToolShell({
@@ -36,6 +38,8 @@ export function ToolShell({
   onShowHistory,
   showHistory = true,
   className,
+  breadcrumbs,
+  backFallback = '/',
 }: ToolShellProps) {
   const [todayRuns, setTodayRuns] = useState(0);
   
@@ -63,6 +67,14 @@ export function ToolShell({
 
   return (
     <div className={cn('min-h-screen bg-gray-50/50', className)}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <BreadcrumbBar items={breadcrumbs ?? [{ label: 'الرئيسية', to: '/' }]} backFallback={backFallback} />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <BreadcrumbBar items={breadcrumbs ?? [{ label: 'الرئيسية', to: '/' }]} backFallback={backFallback} />
+      </div>
+
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

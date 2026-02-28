@@ -7,125 +7,69 @@ import App from './App.tsx'
 import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
 import NotFoundPage from './pages/NotFound.tsx'
+import ComingSoon from './pages/ComingSoon'
 
-// Tool Picker & Smart Tools
-import StartPage from './pages/start/Index.tsx'
+// Tools / Templates
 import ToolPage from './pages/tools/ToolPage.tsx'
-import AccountPage from './pages/AccountPage.tsx'
-
-// Templates
-import TemplatesPage from './pages/templates/Index.tsx'
+import TemplatesPage from './pages/TemplatesPage.tsx'
 import TemplatePage from './pages/templates/TemplatePage.tsx'
 
-// Other Pages
-import SupportPage from './pages/Support.tsx'
-import PaymentPage from './pages/payment/Index.tsx'
-import DashboardPage from './pages/dashboard/Index.tsx'
-import AdminPage from './pages/admin/Index.tsx'
 
-import { ROUTES, getSectionFromSearch, getHomeSectionUrl } from '@/lib/routes'
-import { ThemeProvider } from '@/contexts/ThemeContext'
+function ScrollToTop() {
+  const { pathname, hash, search } = useLocation()
 
-/**
- * ScrollToSection Component
- * Handles scrolling to sections based on query params
- */
-function ScrollToSection() {
-  const location = useLocation();
-  
   useEffect(() => {
-    const section = getSectionFromSearch(location.search);
-    if (section && location.pathname === '/') {
-      // Small delay to ensure DOM is ready
-      setTimeout(() => {
-        if (section === 'hero') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          const element = document.getElementById(section);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      }, 100);
-    }
-  }, [location]);
-  
-  return null;
-}
+    // When navigating between routes, ensure we start at top.
+    // For in-page anchors, let the browser handle the scroll.
+    if (!hash) window.scrollTo(0, 0)
 
-/**
- * HomeWrapper Component
- * Wraps the App component with scroll handling
- */
-function HomeWrapper() {
-  return (
-    <>
-      <ScrollToSection />
-      <App />
-    </>
-  );
+    // Support home section deep-links like "/?section=tools"
+    const params = new URLSearchParams(search)
+    const section = params.get('section')
+    if (section) {
+      // let the page render first
+      setTimeout(() => {
+        const el = document.getElementById(section)
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 50)
+    }
+  }, [pathname, hash, search])
+
+  return null
 }
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
-      <ThemeProvider>
-        <Toaster position="top-center" richColors />
-        <Routes>
-        {/* Home Route with section query param support */}
-        <Route path={ROUTES.HOME} element={<HomeWrapper />} />
-        
-        {/* Auth Routes */}
-        <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.REGISTER} element={<Register />} />
-        
-        {/* Templates Routes */}
-        <Route path={ROUTES.TEMPLATES} element={<TemplatesPage />} />
-        <Route path={ROUTES.TEMPLATE_DETAIL} element={<TemplatePage />} />
-        
-        {/* Tool Routes - Dynamic route only */}
-        <Route path={ROUTES.START} element={<StartPage />} />
-        <Route path={ROUTES.TOOL_DETAIL} element={<ToolPage />} />
-        
-        {/* Legacy /tools redirect */}
-        <Route 
-          path="/tools" 
-          element={<Navigate to={ROUTES.START} replace />} 
-        />
-        
-        {/* Legacy Tool Routes - Redirect broken slugs to /start */}
-        <Route path="/tools/certificate-maker" element={<Navigate to={ROUTES.START} replace />} />
-        <Route path="/tools/schedule-builder" element={<Navigate to={ROUTES.START} replace />} />
-        <Route path="/tools/report-generator" element={<Navigate to={ROUTES.START} replace />} />
-        <Route path="/tools/performance-analyzer" element={<Navigate to={ROUTES.START} replace />} />
-        <Route path="/tools/survey-builder" element={<Navigate to={ROUTES.START} replace />} />
-        
-        {/* User Account Routes */}
-        <Route path={ROUTES.ACCOUNT} element={<AccountPage />} />
-        <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
-        
-        {/* Admin Route */}
-        <Route path={ROUTES.ADMIN} element={<AdminPage />} />
-        
-        {/* Support Route */}
-        <Route path={ROUTES.SUPPORT} element={<SupportPage />} />
-        
-        {/* Payment Route */}
-        <Route path={ROUTES.PAYMENT} element={<PaymentPage />} />
-        
-        {/* Legacy Pricing redirect - redirects to home with section param */}
-        <Route 
-          path="/pricing" 
-          element={<Navigate to={getHomeSectionUrl('pricing')} replace />} 
-        />
-        
-        {/* Not Found Route */}
-        <Route path="/notfound" element={<NotFoundPage />} />
-        
-        {/* Catch all - show NotFound page */}
+      <ScrollToTop />
+      <Routes>
+        {/* Landing */}
+        <Route path="/" element={<App />} />
+
+        {/* Auth */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+
+        {/* Libraries */}
+        <Route path="/tools" element={<Navigate to="/?section=tools" replace />} />        <Route path="/tools/:slug" element={<ToolPage />} />
+
+        <Route path="/templates" element={<TemplatesPage />} />
+        <Route path="/templates/:slug" element={<TemplatePage />} />
+
+        {/* Tool editor */}
+        <Route path="/editor/:toolId" element={<ToolEditorPage />} />
+
+        {/* Legacy redirects (old links) */}
+        <Route path="/start" element={<Navigate to="/tools" replace />} />
+        <Route path="/tool/:slug" element={<Navigate to="/tools" replace />} />
+        <Route path="/template/:slug" element={<Navigate to="/templates" replace />} />
+        <Route path="/templates/:slug/*" element={<Navigate to="/templates" replace />} />
+
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="/coming-soon/:kind/:slug?" element={<ComingSoon />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      </ThemeProvider>
+      <Toaster richColors position="top-center" />
     </HashRouter>
   </StrictMode>,
 )
