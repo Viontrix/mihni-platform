@@ -41,6 +41,7 @@ function ScrollToTop() {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
+<<<<<<< Updated upstream
       <ScrollToTop />
       <Routes>
         {/* Landing */}
@@ -67,6 +68,62 @@ createRoot(document.getElementById('root')!).render(
 
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="/coming-soon/:kind/:slug?" element={<ComingSoon />} />
+=======
+      <ThemeProvider>
+        <Toaster position="top-center" richColors />
+        <Routes>
+        {/* Home Route with section query param support */}
+        <Route path={ROUTES.HOME} element={<HomeWrapper />} />
+        
+        {/* Auth Routes */}
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.REGISTER} element={<Register />} />
+        
+        {/* Templates Routes */}
+        <Route path={ROUTES.TEMPLATES} element={<TemplatesPage />} />
+        <Route path={ROUTES.TEMPLATE_DETAIL} element={<TemplatePage />} />
+        
+        {/* Tool Routes - Dynamic route only */}
+        <Route path={ROUTES.START} element={<StartPage />} />
+        <Route path={ROUTES.TOOL_DETAIL} element={<ToolPage />} />
+        
+        {/* Legacy /tools redirect */}
+        <Route 
+          path="/tools" 
+          element={<Navigate to={ROUTES.START} replace />} 
+        />
+        
+        {/* Legacy Tool Routes - Redirect broken slugs to /start */}
+        <Route path="/tools/certificate-maker" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/schedule-builder" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/report-generator" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/performance-analyzer" element={<Navigate to={ROUTES.START} replace />} />
+        <Route path="/tools/survey-builder" element={<Navigate to={ROUTES.START} replace />} />
+        
+        {/* User Account Routes */}
+        <Route path={ROUTES.ACCOUNT} element={<AccountPage />} />
+        <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+        
+        {/* Admin Route */}
+        <Route path={ROUTES.ADMIN} element={<AdminPage />} />
+        
+        {/* Support Route */}
+        <Route path={ROUTES.SUPPORT} element={<SupportPage />} />
+        
+        {/* Payment Route */}
+        <Route path={ROUTES.PAYMENT} element={<PaymentPage />} />
+        
+        {/* Legacy Pricing redirect - redirects to home with section param */}
+        <Route 
+          path="/pricing" 
+          element={<Navigate to={getHomeSectionUrl('pricing')} replace />} 
+        />
+        
+        {/* Not Found Route */}
+        <Route path="/notfound" element={<NotFoundPage />} />
+        
+        {/* Catch all - show NotFound page */}
+>>>>>>> Stashed changes
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Toaster richColors position="top-center" />

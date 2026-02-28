@@ -32,6 +32,10 @@ import { Input } from '@/components/ui/input';
 import Navbar from '@/sections/Navbar';
 import { ROUTES, getTemplateUrl } from '@/lib/routes';
 import { toast } from 'sonner';
+<<<<<<< Updated upstream
+=======
+import { PageBackBar } from '@/components/navigation/PageBackBar';
+>>>>>>> Stashed changes
 
 // Template Badge Component
 const TemplateBadge = ({ type }: { type: string }) => {
@@ -152,7 +156,12 @@ const TemplateCard = ({ template, index }: { template: typeof allTemplates[0]; i
           className="w-full text-xs mt-2 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-green-primary/50 hover:text-green-primary transition-all"
           onClick={(e) => {
             e.stopPropagation();
+<<<<<<< Updated upstream
             const url = `${window.location.origin}/#${template.id}`;
+=======
+            // Copy a TEMPLATE link (not the tool editor) to avoid 404s.
+            const url = `${window.location.origin}/#${getTemplateUrl(template.id)}`;
+>>>>>>> Stashed changes
             navigator.clipboard.writeText(url).then(() => {
               toast.success('تم نسخ الرابط بنجاح');
             });
@@ -372,10 +381,15 @@ export default function TemplatesPage() {
       {/* Spacer for fixed navbar */}
       <div className="h-[80px]" />
 
+<<<<<<< Updated upstream
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <BreadcrumbBar items={[{ label: 'الرئيسية', to: '/' }, { label: 'القوالب' }]} backFallback={getHomeSectionUrl('templates')} />
       </div>
 
+=======
+      {/* Back / Home */}
+      <PageBackBar className="pt-4" />
+>>>>>>> Stashed changes
 
       {/* Hero Section */}
       <section className="relative py-16 px-4 bg-gradient-to-b from-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:to-[#1B2D2B]">

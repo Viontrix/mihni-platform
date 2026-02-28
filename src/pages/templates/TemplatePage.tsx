@@ -15,11 +15,19 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/api';
+<<<<<<< Updated upstream
 import { ROUTES, getTemplateUrl, getTemplatesUrl } from '@/lib/routes';
 import { templateRegistry } from '@/lib/templates/registry';
 import Navbar from '@/sections/Navbar';
 import { toast } from 'sonner';
 import BreadcrumbBar from '@/components/navigation/BreadcrumbBar';
+=======
+import { ROUTES, getTemplateUrl } from '@/lib/routes';
+import { templateRegistry } from '@/lib/templates/registry';
+import Navbar from '@/sections/Navbar';
+import { toast } from 'sonner';
+import { PageBackBar } from '@/components/navigation/PageBackBar';
+>>>>>>> Stashed changes
 
 // ============================================
 // Types
@@ -239,6 +247,7 @@ export default function TemplatePage() {
       <Navbar />
       <div className="h-[80px]" />
 
+<<<<<<< Updated upstream
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <BreadcrumbBar
           items={[{ label: 'الرئيسية', to: '/' }, { label: 'القوالب', to: getTemplatesUrl() }, { label: template?.title ?? 'قالب' }]}
@@ -246,6 +255,9 @@ export default function TemplatePage() {
         />
       </div>
 
+=======
+      <PageBackBar className="pt-4" />
+>>>>>>> Stashed changes
 
       {/* Header */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

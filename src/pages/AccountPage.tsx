@@ -23,6 +23,7 @@ import {
   TrendingUp,
   Zap
 } from 'lucide-react';
+import { PageBackBar } from '@/components/navigation/PageBackBar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -143,6 +144,8 @@ export default function AccountPage() {
 
   return (
     <div className="min-h-screen bg-gray-50/50">
+      <PageBackBar className="pt-6" />
+
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

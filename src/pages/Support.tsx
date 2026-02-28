@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ROUTES } from '@/lib/routes';
 import Navbar from '@/sections/Navbar';
+import { PageBackBar } from '@/components/navigation/PageBackBar';
 
 const faqs = [
   {
@@ -111,6 +112,8 @@ export default function SupportPage() {
       
       {/* Spacer for fixed navbar */}
       <div className="h-[80px]" />
+
+      <PageBackBar className="pt-4" />
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
